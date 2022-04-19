@@ -18,7 +18,7 @@
 
 ## Usage
 
-**We provide three options for users to use MLModelCI: CLI, Running Programmatically and Web interface**
+**We provide three options for users to use Tiny3d: CLI, Running Programmatically and Web interface**
 
 ### 1. CLI
 
