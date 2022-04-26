@@ -2,7 +2,7 @@ from augmentation_utils import *
 
 def lidar_augmentation(lidar_data, method):
     """
-        Use different data augmentation methods to augments lidar data.
+        Use different data augmentation methods to augment lidar data.
 
         input:
             lidar_data: dict
