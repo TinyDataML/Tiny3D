@@ -4,7 +4,7 @@ def lidar_augmentation(lidar_data, method):
     """
         Use different data augmentation methods to augment lidar data.
 
-        input:
+        Args:
             lidar_data: dict
             method: str
         return:
