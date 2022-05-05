@@ -1,7 +1,7 @@
 import pylisa
 import numpy as np
 
-from simulation_utils import ParameterSet, simulate_fog
+from simulation_fog_utils import ParameterSet, simulate_fog
 
 def lidar_simulation(lidar_data, method):
     """
