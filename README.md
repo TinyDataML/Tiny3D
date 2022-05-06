@@ -7,7 +7,7 @@
 [Documentation](https://multibench.readthedocs.io/en/latest/), [Tutorials and examples](https://github.com/pliang279/MultiBench/tree/main/examples)
 
 ## Introduction
-tiny3d is a data-centric ai system for 3d object detection online inference services **Performance Optimization**. Through our tiny3d users can easily get a high accuracy and high speed 3d object detection online inference service in a data-centeric ai way.
+tiny3d is a data-centric ai system for 3d object detection online inference services **Performance Optimization**. Through our tiny3d users can easily get a high accuracy and high speed 3d object detection online inference service in a data-centeric ai and user-friendly web interface way.
 
 ## lidar data operations currently supported
 - lidar data loading
