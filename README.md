@@ -26,7 +26,7 @@ tiny3d is a data-centric ai system for deployment and post-deployment online inf
 - model deploy
 - model ensemble
 
-## data-model co-operations cueetntly supported
+## data-model co-operations currently supported
 - training
 - testing
 - bad case visulization
