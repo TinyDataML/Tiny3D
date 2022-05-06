@@ -6,8 +6,8 @@
 
 [Documentation](https://multibench.readthedocs.io/en/latest/), [Tutorials and examples](https://github.com/pliang279/MultiBench/tree/main/examples)
 
-## Introduction
-Tiny3D is a lightweight data-centric ai system for 3d object detection online inference services **Performance Optimization**. Through our tiny3d users can easily get a high accuracy and high speed 3d object detection online inference service in a data-centeric ai and user-friendly web interface way.
+## Introduction 
+Tiny3D is a light weight data-centric ai system for 3d object detection online inference services **Performance Optimization**. Through our tiny3d users can easily get a high accuracy and high speed 3d object detection online inference service in a data-centeric ai and user-friendly web interface way.
 
 ## features
 - Data centric
