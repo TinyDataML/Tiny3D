@@ -9,13 +9,13 @@
 ## Introduction 
 Tiny3D is a light weight **Performance Optimization System** for 3d object detection online/offline inference services or 3d object detection competetion performance optimization. Through our Tiny3d users can easily get a **high accuracy and high speed** 3d object detection service/competetion result in a data-model double centeric ai and user-friendly web interface way.
 
-## features
+## Features
 - Data centric
 - Compressor with prediction function
 - A user-friendly web interface
 - Easily be a Plug-in to any machine learning system.
 
-## lidar data operations currently supported
+## Lidar data operations currently supported
 - lidar data loading
 - lidar data sampling
 - lidar data preprocessing/cleaning
@@ -27,12 +27,12 @@ Tiny3D is a light weight **Performance Optimization System** for 3d object detec
 - lidar data domain adptation
 - lidar data auto-labeling
 
-## lidar based 3d object detection model operations currently supported
+## Lidar based 3d object detection model operations currently supported
 - model compression
 - model deploy
 - model ensemble
 
-## data-model co-operations currently supported
+## Data-Model co-operations currently supported
 - training
 - testing
 - bad case visulization
