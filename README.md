@@ -1,4 +1,10 @@
 # Tiny3D
+[Tiny3D website](https://cmu-multicomp-lab.github.io/multibench/)
+
+[![codecov](https://codecov.io/gh/pliang279/MultiBench/branch/main/graph/badge.svg?token=IN899HIWCF)](https://codecov.io/gh/pliang279/MultiBench)
+[![Documentation Status](https://readthedocs.org/projects/multibench/badge/?version=latest)](https://multibench.readthedocs.io/en/latest/?badge=latest)
+
+[Documentation](https://multibench.readthedocs.io/en/latest/), [Tutorials and examples](https://github.com/pliang279/MultiBench/tree/main/examples)
 
 ## Introduction
 tiny3d is a data-centric ai system for deployment and post-deployment online inference services. Through our tiny3d users can easily get a high accuracy and high speed 3d object detection online inference service in a data-centeric ai way.
