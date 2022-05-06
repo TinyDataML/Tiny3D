@@ -7,8 +7,8 @@ from sklearn.neighbors import kneighbors_graph, KDTree
 import argparse
 import math
 
-from dmr.models.denoise import PointCloudDenoising
-from dmr.models.utils import *
+from tiny3d.deephub.denoisy.dmr.models.denoise import PointCloudDenoising
+from tiny3d.deephub.denoisy.dmr.models.utils import *
 
 from tqdm import tqdm
 
