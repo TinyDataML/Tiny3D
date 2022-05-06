@@ -7,7 +7,7 @@
 [Documentation](https://multibench.readthedocs.io/en/latest/), [Tutorials and examples](https://github.com/pliang279/MultiBench/tree/main/examples)
 
 ## Introduction 
-Tiny3D is a light weight **Performance Optimization System** for 3d object detection online inference services or 3d object detection competetion performance optimization. Through our Tiny3d users can easily get a **high accuracy and high speed** 3d object detection online inference service in a data-model double centeric ai and user-friendly web interface way.
+Tiny3D is a light weight **Performance Optimization System** for 3d object detection online/offline inference services or 3d object detection competetion performance optimization. Through our Tiny3d users can easily get a **high accuracy and high speed** 3d object detection service/competetion result in a data-model double centeric ai and user-friendly web interface way.
 
 ## features
 - Data centric
