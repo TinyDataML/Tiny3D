@@ -1,5 +1,5 @@
-# Product3D
-[Product3D website](https://cmu-multicomp-lab.github.io/multibench/)
+# Tiny3D
+[Tiny3D website](https://cmu-multicomp-lab.github.io/multibench/)
 
 [![codecov](https://codecov.io/gh/pliang279/MultiBench/branch/main/graph/badge.svg?token=IN899HIWCF)](https://codecov.io/gh/pliang279/MultiBench)
 [![Documentation Status](https://readthedocs.org/projects/multibench/badge/?version=latest)](https://multibench.readthedocs.io/en/latest/?badge=latest)
@@ -7,8 +7,8 @@
 [Documentation](https://multibench.readthedocs.io/en/latest/), [Tutorials and examples](https://github.com/pliang279/MultiBench/tree/main/examples)
 
 ## Introduction 
-Product3D is a light weight 3d object detection service production system.
-Product3D solution embodies two transformative features: 
+Tiny3D is a light weight 3d object detection service production system.
+Tiny3D solution embodies two transformative features: 
 1. **Performance Optimization Engine** for 3d object detection online/offline inference services product performance optimization. Through this engine users can easily get a high accuracy and high speed 3d object detection service/competetion result in a data-model double centeric ai way
 2. **a user-friendly web interface** for a developer team to product a 3d object detection service pictorially, in a low-code fashion
 
