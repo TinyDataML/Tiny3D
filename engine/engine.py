@@ -1,5 +1,6 @@
 import torch
 import pytorch_lightning as pl
+from torch.utils.data import DataLoader
 
 def fit(train_dataset, val_dataset, model, batchsize=100, epoch=1, devices=4, accelerator="gpu", strategy="deepspeed_stage_2", precision=32):
     """
