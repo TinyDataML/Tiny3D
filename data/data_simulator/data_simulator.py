@@ -15,6 +15,7 @@ def lidar_simulation(lidar_data, method):
             https://github.com/velatkilic/LISA
     """
     points = lidar_data['points']
+    points = points.numpy()
 
     if method == 'rainy':
         lidar = pylisa.Lidar()  # lidar object
@@ -29,9 +30,6 @@ def lidar_simulation(lidar_data, method):
 
     if method == "foggy":
         parameter_set = ParameterSet(alpha=0.5, gamma=0.000001)
-
-        points = np.fromfile(all_paths[i], dtype=np.float32)
-        points = points.reshape((-1, args.n_features))
 
         points, _, _ = simulate_fog(parameter_set, points, 10)
 
