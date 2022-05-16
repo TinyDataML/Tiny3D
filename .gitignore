@@ -1,0 +1,11 @@
+*.npy
+*.onnx
+*.trt
+*.pyc
+*.zip
+*.tar
+*.exe
+*.log
+**/__pycache__/**
+.vscode/
+mmdetection3d/
