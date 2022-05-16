@@ -1,5 +1,4 @@
 import torch
-import tensorrt as trt
 from model.model_deployor.onnx2tensorrt import create_trt_engine, save_trt_engine
 
 trt_input_shapes_kitti = {
@@ -58,7 +57,6 @@ def deploy(model, model_inputs, input_names, output_names, dynamic_axes, backend
         engine = create_trt_engine(
             output_file,
             input_shapes=trt_input_shapes_kitti,
-            log_level=trt.Logger.INFO,
             fp16_mode=fp16,
             int8_mode=False,
             int8_param={},

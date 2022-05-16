@@ -1,13 +1,16 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 from typing import Dict, Sequence, Union
-import tensorrt as trt
+import importlib
+if importlib.util.find_spec('tensorrt') is not None:
+    import tensorrt as trt
+
 import onnx
 import torch
 from packaging import version
 
 def create_trt_engine(onnx_model: Union[str, onnx.ModelProto],
                       input_shapes: Dict[str, Sequence[int]],
-                      log_level: trt.Logger.Severity = trt.Logger.ERROR,
+                      log_level: trt.Logger.Severity = trt.Logger.INFO,
                       fp16_mode: bool = False,
                       int8_mode: bool = False,
                       int8_param: dict = None,
@@ -21,7 +24,7 @@ def create_trt_engine(onnx_model: Union[str, onnx.ModelProto],
         input_shapes (Dict[str, Sequence[int]]): The min/opt/max shape of
             each input.
         log_level (trt.Logger.Severity): The log level of TensorRT. Defaults to
-            `trt.Logger.ERROR`.
+            `trt.Logger.INFO`.
         fp16_mode (bool): Specifying whether to enable fp16 mode.
             Defaults to `False`.
         int8_mode (bool): Specifying whether to enable int8 mode.
