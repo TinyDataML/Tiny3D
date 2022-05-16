@@ -1,5 +1,5 @@
 import torch
-import unitest
+import unittest
 
 from tiny3d.data.data_simulator import lidar_simulator
 
