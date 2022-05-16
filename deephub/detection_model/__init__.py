@@ -1,1 +1,1 @@
-from .pointpillars import *
+from .pointpillars import Pointpillars

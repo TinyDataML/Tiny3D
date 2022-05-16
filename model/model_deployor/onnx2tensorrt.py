@@ -1,3 +1,4 @@
+# Copyright (c) OpenMMLab. All rights reserved.
 from typing import Dict, Sequence, Union
 import tensorrt as trt
 import onnx
@@ -175,6 +176,14 @@ def torch_device_from_trt(device: trt.TensorLocation):
         return TypeError(f'{device} is not supported by torch')
 
 def print_trt_engine(engine: trt.ICudaEngine):
+    """
+    Print trt engine information.
+
+    Args:
+        tensorrt.ICudaEngine: The TensorRT engine loaded from disk.
+    Returns:
+        None
+    """
     for idx in range(engine.num_bindings):
         is_input = engine.binding_is_input(idx)
         name = engine.get_binding_name(idx)

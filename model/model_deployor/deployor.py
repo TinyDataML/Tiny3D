@@ -22,6 +22,22 @@ trt_input_shapes_kitti = {
 
 
 def deploy(model, model_inputs, input_names, output_names, dynamic_axes, backend='onnxruntime', output_file='end2end', verbose=False, fp16=False):
+    """
+        Deploy pytorch model to different backends.
+        Args:
+            model: torch.nn.module
+            model_inputs: tensor
+            input_names: deployment model input names
+            output_names: deployment model output names
+            dynamic_axes: specifies the dynamic dimension of the deployment model
+            backend: specify convert backend
+            output_file: output file name
+            fp16: TensorRT fp16
+        Return:
+            backend file name
+        Reference:
+            https://github.com/open-mmlab/mmdeploy/blob/master/tools/deploy.py
+    """
     assert backend in ['onnxruntime', 'tensorrt'], 'This backend isn\'t supported now!'
 
     output_file = output_file + '.onnx'
