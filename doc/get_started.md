@@ -83,13 +83,23 @@ Versions of some packages：
 
 ```shell
 python tools/deploy.py
-/the/path/of/kitti_000008.bin
-/the/path/of/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth
+test/test_model_ops/data/kitti/kitti_000008.bin
+checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth
 onnxruntime
+pointpillars
+kitti
 pointpillars
 ```
 
-
+```shell
+python tools/deploy.py
+test/test_model_ops/data/nuscenes/n008-2018-08-01-15-16-36-0400__LIDAR_TOP__1533151603547590.pcd.bin
+checkpoints/centerpoint_02pillar_second_secfpn_circlenms_4x8_cyclic_20e_nus_20201004_170716-a134a233.pth
+onnxruntime
+centerpoint
+nuscenes
+centerpoint
+```
 
 
 
