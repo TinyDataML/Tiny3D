@@ -58,8 +58,13 @@ test_pipelines = {
                 ],
     },
     'centerpoint': {
-        'nuScenes': [
-                   dict(type='LoadPointsFromFile', coord_type='LIDAR', load_dim=4, use_dim=4),
+        'nuscenes': [
+                   dict(
+                        type='LoadPointsFromFile',
+                        coord_type='LIDAR',
+                        load_dim=5,
+                        use_dim=4,
+                        file_client_args=dict(backend='disk')),
                    dict(
                         type='MultiScaleFlipAug3D',
                         img_scale=(1333, 800),
@@ -67,21 +72,22 @@ test_pipelines = {
                         flip=False,
                         transforms=[
                             dict(
-                                type='GlobalRotScaleTrans',
-                                rot_range=[0, 0],
-                                scale_ratio_range=[1.0, 1.0],
-                                translation_std=[0, 0, 0]),
+                                 type='GlobalRotScaleTrans',
+                                 rot_range=[0, 0],
+                                 scale_ratio_range=[1.0, 1.0],
+                                 translation_std=[0, 0, 0]),
                             dict(type='RandomFlip3D'),
                             dict(
-                                type='PointsRangeFilter',
-                                point_cloud_range=[0, -39.68, -3, 69.12, 39.68, 1]),
-                            dict(
-                                type='DefaultFormatBundle3D',
-                                class_names=['Car'],
-                                with_label=False),
+                                 type='DefaultFormatBundle3D',
+                                 class_names=[
+                                             'car', 'truck', 'construction_vehicle', 'bus', 'trailer',
+                                             'barrier', 'motorcycle', 'bicycle', 'pedestrian',
+                                             'traffic_cone'
+                                             ],
+                                 with_label=False),
                             dict(type='Collect3D', keys=['points'])
-                        ])
-                ],
+        ])
+],
     }
 }
 
@@ -98,11 +104,17 @@ voxel_layers = {
                         point_cloud_range=[-76.8, -51.2, -2, 76.8, 51.2, 4],
                         voxel_size=[0.08, 0.08, 0.1],
                         max_voxels=(80000, 90000))
+    },
+    'centerpoint': {
+        'nuscenes': dict(
+                        max_num_points=20,
+                        voxel_size=[0.2, 0.2, 8],
+                        max_voxels=(30000, 40000),
+                        point_cloud_range=[-51.2, -51.2, -5.0, 51.2, 51.2, 3.0])
     }
 }
 
-
-def create_input_pointpillars(pcd, dataset, device):
+def create_input(pcd, dataset, model, device):
     """Create input for detector.
 
     Args:
@@ -112,11 +124,10 @@ def create_input_pointpillars(pcd, dataset, device):
         tuple: (data, input), meta information for the input pcd
             and model input.
     """
-    if dataset == 'kitti':
-        data = read_pcd_file(pcd, test_pipelines['pointpillars']['kitti'], device, box_type_3d='LiDAR')
-        voxels, num_points, coors = voxelize(
-            voxel_layers['pointpillars']['kitti'], data['points'][0])
-        return data, (voxels, num_points, coors)
+    data = read_pcd_file(pcd, test_pipelines[model][dataset], device, box_type_3d='LiDAR')
+    voxels, num_points, coors = voxelize(
+        voxel_layers[model][dataset], data['points'][0])
+    return data, (voxels, num_points, coors)
 
 def read_pcd_file(pcd, test_pipeline, device, box_type_3d):
     """Read data from pcd file and run test pipeline.
