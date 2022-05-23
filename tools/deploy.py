@@ -5,11 +5,11 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 import torch
 from argparse import ArgumentParser
 
-from deephub.detection_model import Pointpillars
+from deephub.detection_model import Pointpillars, Centerpoint
 
 from mmcv.runner import load_checkpoint
 from model.model_deployor.deployor import deploy
-from model.model_deployor.deployor_utils import create_input_pointpillars
+from model.model_deployor.deployor_utils import create_input
 from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
 
 
@@ -19,16 +19,21 @@ def main():
     parser.add_argument('checkpoint', help='Checkpoint file')
     parser.add_argument('backend', default='onnx', help='backend name')
     parser.add_argument('output', default='onnx', help='backend name')
+    parser.add_argument('dataset', default='onnx', help='backend name')
+    parser.add_argument('model_name', default='onnx', help='backend name')
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
 
     args = parser.parse_args()
 
     # Init model and load checkpoints
-    model = Pointpillars()
+    if args.model_name == 'pointpillars':
+        model = Pointpillars()
+    elif args.model_name == 'centerpoint':
+        model = Centerpoint()
+    load_checkpoint(model, args.checkpoint, map_location='cpu')
     model.cuda()
     model.eval()
-    load_checkpoint(model, args.checkpoint, map_location='cpu')
 
     # define deploy params
     input_names = ['voxels', 'num_points', 'coors']
@@ -39,10 +44,11 @@ def main():
     # dynamic_axes = None
     fp16 = False
 
-    data, model_inputs = create_input_pointpillars(args.pcd, 'kitti', args.device)
+    data, model_inputs = create_input(args.pcd, args.dataset, args.model_name, args.device)
 
     # deploy
-    backend_file = deploy(model, model_inputs, input_names, output_names, dynamic_axes, backend=args.backend, output_file=args.output, fp16=fp16)
+    backend_file = deploy(model, model_inputs, input_names, output_names, dynamic_axes,
+                          backend=args.backend, output_file=args.output, fp16=fp16, dataset=args.dataset)
 
     # verify
     torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])

@@ -1,1 +1,0 @@
-from .pointpillars import Pointpillars

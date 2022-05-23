@@ -1,10 +1,10 @@
-
+# Copyright (c) OpenMMLab. All rights reserved.
 from mmcv.runner import BaseModule
-from .pillar_encoder import PillarFeatureNet
-from .pillar_scatter import PointPillarsScatter
-from .second import SECOND
-from .second_fpn import SECONDFPN
-from .anchor3d_head import Anchor3DHead
+from .voxel_encoders import PillarFeatureNet
+from .middle_encoders import PointPillarsScatter
+from .backbones import SECOND
+from .necks import SECONDFPN
+from .heads import Anchor3DHead
 
 class Pointpillars(BaseModule):
     """Backbone network for SECOND/PointPillars/PartA2/MVXNet.
