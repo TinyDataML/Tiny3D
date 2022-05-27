@@ -101,7 +101,9 @@ nuscenes
 centerpoint
 ```
 
-
+checkpoints:
+[pointpillars](https://drive.google.com/file/d/1YZoL6J9tGc43kgFlf9mBx8pw0fZrczjd/view?usp=sharing)
+[centerpoint](https://drive.google.com/file/d/1kL-6ZUmamlMH06ADLkQ0Y2sPbh1JBZ1b/view?usp=sharing)
 
 
 
