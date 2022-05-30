@@ -3,7 +3,6 @@ import unittest
 
 from data.data_augmentor.data_augmentor import lidar_augmentation
 
-
 class TestDataAugmentator(unittest.TestCase):
     
     def test_data_augmentor_random_flip(self):
@@ -18,7 +17,6 @@ class TestDataAugmentator(unittest.TestCase):
         data_augmented = lidar_augmentation(lidar_data, 'random_flip_along_y')
         assert not data_augmented['points'].equal(points)
         assert not data_augmented['gt_boxes'].equal(gt_boxes)
-        
         
     def test_data_augmentor_global_ops(self):
         points = torch.randn(2000, 4)
@@ -136,6 +134,7 @@ class TestDataAugmentator(unittest.TestCase):
         data_augmented = lidar_augmentation(lidar_data, 'pyramid')
         assert not data_augmented['points'].equal(points)
         assert not data_augmented['gt_boxes'].equal(gt_boxes)   
+        
         
 if __name__ == '__main__':
     unittest.main()

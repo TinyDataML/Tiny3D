@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.autograd import Function
 
 from . import common_utils
-from . import roiaware_pool3d_cuda
+#from . import roiaware_pool3d_cuda
 
 
 def points_in_boxes_cpu(points, boxes):
