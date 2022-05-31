@@ -24,7 +24,31 @@ RNG = np.random.default_rng(seed=42)
 
 # AVAILABLE_TAU_Hs = [20]
 # LIDAR_FOLDERS = ['lidar_hdl64_strongest', 'lidar_hdl64_last']
-# INTEGRAL_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / 'integral_lookup_tables' / 'original'
+# INTEGRAL_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / 'integral_lookup_tables' / 'original
+
+
+RNG = np.random.default_rng(seed=42)
+
+AVAILABLE_TAU_Hs = [20]
+LIDAR_FOLDERS = ['lidar_hdl64_strongest', 'lidar_hdl64_last']
+INTEGRAL_PATH = Path(os.path.dirname(os.path.realpath(__file__))) / 'integral_lookup_tables' / 'original'
+
+
+def get_available_alphas() -> List[float]:
+
+    alphas = []
+
+    for file in os.listdir(INTEGRAL_PATH):
+
+        if file.endswith(".pickle"):
+
+            alpha = file.split('_')[-1].replace('.pickle', '')
+
+            alphas.append(float(alpha))
+
+    return sorted(alphas)
+
+
 
 
 class ParameterSet:
