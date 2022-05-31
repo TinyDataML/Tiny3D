@@ -1,23 +1,27 @@
 import torch
-import unitest
+import unittest
 
-from tiny3d.data.data_simulator import lidar_simulator
+from data.data_simulator.data_simulator import lidar_simulator
 
 
 class TestDataSimulator(unittest.TestCase):
 
-    @classmethod
-    def setUpData(cls):
-        cls.points = torch.randn(2000, 4)
-
-    # noinspection DuplicatedCode
-    def test_data_simulator_rainy(self):
-        data_simulated = lidar_simulation(cls.lidar_data, 'rainy')
-        assert data_simulated['points'].shape == torch.size([2000, 4])
 
     def test_data_simulator_foggy(self):
-        data_simulated = lidar_simulation(cls.lidar_data, 'foggy')
-        assert data_simulated['points'].shape == torch.size([2000, 4])
+        points = torch.randn(2000, 4)
+        lidar_data = {'points':points}
+        data_simulated = lidar_simulator(lidar_data, 'foggy')
+        print('=========== test_data_simulator_foggy ===========')
+        print('input.type')
+        print(type(points))
+        print('output.type')
+        print(type(data_simulated['points']))
+        print('input.dtype')
+        print(points.dtype)
+        print('output.dtype')
+        print(data_simulated['points'].dtype)
+ 
+        assert not data_simulated['points'].equal(points)
 
 
 if __name__ == '__main__':

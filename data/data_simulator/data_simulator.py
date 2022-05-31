@@ -1,9 +1,10 @@
-import pylisa
+#import pylisa
 import numpy as np
+import torch
 
-from simulation_fog_utils import ParameterSet, simulate_fog
+from .simulator_fog_utils import ParameterSet, simulate_fog
 
-def lidar_simulation(lidar_data, method):
+def lidar_simulator(lidar_data, method):
     """
         Use different extreme weather lidar simulation methods to augment lidar data.
         Args:
@@ -14,10 +15,11 @@ def lidar_simulation(lidar_data, method):
         Reference:
             https://github.com/velatkilic/LISA
     """
-    points = lidar_data['points']
-    points = points.numpy()
+    points_original = lidar_data['points']
+    points = points_original.numpy()
 
     if method == 'rainy':
+        import pylisa
         lidar = pylisa.Lidar()  # lidar object
         water = pylisa.Water()  # material object
         rain = pylisa.MarshallPalmerRain()  # particle distribution model
@@ -33,6 +35,6 @@ def lidar_simulation(lidar_data, method):
 
         points, _, _ = simulate_fog(parameter_set, points, 10)
 
-    lidar_data['points'] = points
+    lidar_data['points'] = torch.from_numpy(points).to(lidar_data['points'].device).type_as(points_original)
 
     return lidar_data
