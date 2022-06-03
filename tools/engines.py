@@ -11,7 +11,7 @@ from mmdet3d.datasets import build_dataset
 from model.model_deployor.deployor_utils import create_input
 from engine.pointpillars_engine import Pointpillars_engine
 from deephub.detection_model import Pointpillars
-from engine.engineor import fit, eval, predict, inference
+from engine import fit, eval, predict, inference
 
 def main(args):
     pl.seed_everything(args.seed, workers=True)
