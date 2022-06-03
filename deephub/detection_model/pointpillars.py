@@ -79,7 +79,7 @@ class Pointpillars(BaseModule):
         """
         voxel_features = self.voxel_encoder(voxels, num_points, coors)
         batch_size = coors[-1, 0] + 1  # refactor
-        assert batch_size == 1
+        # assert batch_size == 1
         x = self.middle_encoder(voxel_features, coors, batch_size)
         x = self.backbone(x)
         x = self.neck(x)
