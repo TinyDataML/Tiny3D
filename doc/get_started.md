@@ -74,7 +74,13 @@ Versions of some packages：
 - tensorrt = 8.2.3.0
 
 
+## engine
 
+### Pytorch Lighting
+
+```shell
+pip install pytorch-lightning
+```
 
 
 # Demo
@@ -83,7 +89,7 @@ Versions of some packages：
 
 ```shell
 python tools/deploy.py
-test/test_model_ops/data/kitti/kitti_000008.bin
+test/data_tobe_tested/kitti/kitti_000008.bin
 checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth
 onnxruntime
 pointpillars
@@ -93,7 +99,7 @@ pointpillars
 
 ```shell
 python tools/deploy.py
-test/test_model_ops/data/nuscenes/n008-2018-08-01-15-16-36-0400__LIDAR_TOP__1533151603547590.pcd.bin
+test/data_tobe_tested/nuscenes/n008-2018-08-01-15-16-36-0400__LIDAR_TOP__1533151603547590.pcd.bin
 checkpoints/centerpoint_02pillar_second_secfpn_circlenms_4x8_cyclic_20e_nus_20201004_170716-a134a233.pth
 onnxruntime
 centerpoint
@@ -104,6 +110,33 @@ centerpoint
 checkpoints:
 [pointpillars](https://drive.google.com/file/d/1YZoL6J9tGc43kgFlf9mBx8pw0fZrczjd/view?usp=sharing)
 [centerpoint](https://drive.google.com/file/d/1kL-6ZUmamlMH06ADLkQ0Y2sPbh1JBZ1b/view?usp=sharing)
+
+
+## engine
+
+You shoule prepare Kitti dataset first as https://github.com/open-mmlab/mmdetection3d/blob/master/docs/zh_cn/datasets/kitti_det.md
+
+The folder structure should be organized as follows.
+```shell
+Tiny3D
+├── checkpoints
+├── deephub
+├── engine
+├── test
+├── tools
+├── kitti
+```
+
+run
+```shell
+python tools/engines.py
+--model_name
+pointpillars
+--mode
+fit/eval/predict/inference/infer_production
+--config
+engine/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car.py
+```
 
 
 
