@@ -9,4 +9,6 @@
 **/__pycache__/**
 .vscode/
 mmdetection3d/
+mmdet3d/
+lightning_logs/
 checkpoints/
