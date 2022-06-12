@@ -6,6 +6,7 @@
 *.tar
 *.exe
 *.log
+*.pth
 **/__pycache__/**
 .vscode/
 mmdetection3d/
