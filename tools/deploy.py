@@ -10,23 +10,19 @@ from deephub.detection_model import Pointpillars, Centerpoint
 from mmcv.runner import load_checkpoint
 from model.model_deployor.deployor import deploy
 from model.model_deployor.deployor_utils import create_input
-import importlib
-if importlib.util.find_spec('tensorrt') is not None:
-    from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
-else:
-    print('Please install TensorRT if you want to convert')
-
+import onnx
+import time
+from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
 
 def main():
     parser = ArgumentParser()
     parser.add_argument('pcd', help='Point cloud file')
     parser.add_argument('checkpoint', help='Checkpoint file')
-    parser.add_argument('backend', default='onnx', help='backend name')
-    parser.add_argument('output', default='onnx', help='backend name')
-    parser.add_argument('dataset', default='onnx', help='backend name')
-    parser.add_argument('model_name', default='onnx', help='backend name')
-    parser.add_argument(
-        '--device', default='cuda:0', help='Device used for inference')
+    parser.add_argument('backend', default='onnx', help='support: onnxruntime, torchscript, tensorrt')
+    parser.add_argument('output', default='onnx', help='output model file name')
+    parser.add_argument('dataset', default='onnx', help='support: kitti, nuscenes')
+    parser.add_argument('model_name', default='onnx', help='support: pointpillars, centerpoint')
+    parser.add_argument('--device', default='cuda:0', help='Device used for inference')
 
     args = parser.parse_args()
 
@@ -37,6 +33,7 @@ def main():
         model = Centerpoint()
     load_checkpoint(model, args.checkpoint, map_location='cpu')
     model.cuda()
+    #model.cpu()
     model.eval()
 
     # define deploy params
@@ -56,6 +53,7 @@ def main():
 
     # verify
     torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])
+
     if args.backend == 'onnxruntime':
         import onnxruntime
 
@@ -71,8 +69,16 @@ def main():
         outputs['scores'] = torch.tensor(ort_output[0])
         outputs['bbox_preds'] = torch.tensor(ort_output[1])
         outputs['dir_scores'] = torch.tensor(ort_output[2])
-
         print('inference successful!')
+
+    if args.backend == 'torchscript':
+        jit_model=torch.jit.load(backend_file)
+        script_output=jit_model(model_inputs[0], model_inputs[1], model_inputs[2])
+        outputs = {}
+        outputs['scores'] = torch.tensor( [item.cpu().detach().numpy() for item in script_output[0]] )
+        outputs['bbox_preds'] = torch.tensor( [item.cpu().detach().numpy() for item in script_output[0]] )
+        outputs['dir_scores'] = torch.tensor( [item.cpu().detach().numpy() for item in script_output[0]] )
+        print("torchscript inference successful")
 
     if args.backend == 'tensorrt':
         engine = load_trt_engine(backend_file)
@@ -124,7 +130,6 @@ def main():
         context.execute_async_v2(bindings, torch.cuda.current_stream().cuda_stream)
 
         print('inference successful!')
-
 
 
 
