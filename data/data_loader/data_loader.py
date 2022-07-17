@@ -14,6 +14,7 @@ def lidar_loader(lidar_data_path, lidar_dataset_path = None, type_name = None):
             lidar_data : dict
     """
     if not lidar_dataset_path:
+        
         if type_name == 'pcd.bin':
             points = np.fromfile(lidar_data_path, dtype=np.float32, count=-1).reshape([-1, 4])
 
