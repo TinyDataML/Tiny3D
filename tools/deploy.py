@@ -12,7 +12,11 @@ from model.model_deployor.deployor import deploy
 from model.model_deployor.deployor_utils import create_input
 import onnx
 import time
-from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
+import importlib
+if importlib.util.find_spec('tensorrt') is not None:
+    from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
+else:
+    print('Please install TensorRT if you want to convert')
 
 def main():
     parser = ArgumentParser()
