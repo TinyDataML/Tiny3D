@@ -4,7 +4,7 @@ def compute_theta(r, h):
 
     return np.exp(-r ** 2 / h**2 * 16)
 
-def weighted_local_optimal_projector(
+def weighted_local_optimal_projection(
     lidar_data, 
     n_points = 1024, 
     num_iter = 25, 
