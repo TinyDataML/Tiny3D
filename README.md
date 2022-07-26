@@ -1,8 +1,8 @@
 # Tiny3D
 [Tiny3D website](https://github.com/TinyDataML/Tiny3D)
 
-[![codecov](https://github.com/TinyDataML/Tiny3D)
-[![Documentation Status](https://github.com/TinyDataML/Tiny3D)
+[![codecov](https://github.com/TinyDataML/Tiny3D)]
+[![Documentation Status](https://github.com/TinyDataML/Tiny3D)]
 
 [Documentation](https://github.com/TinyDataML/Tiny3D), [Tutorials and examples](https://github.com/TinyDataML/Tiny3D)
 
@@ -44,5 +44,5 @@ Tiny3D solution embodies two transformative features:
 ## Demo
 
 ## Acknowlegement
-[NTU-MLModlCI](https://github.com/cap-ntu/ML-Model-CI)
-[MLSys and MLOps Community](https://github.com/MLSysOps)
+- [NTU-MLModlCI](https://github.com/cap-ntu/ML-Model-CI)
+- [MLSys and MLOps Community](https://github.com/MLSysOps)
