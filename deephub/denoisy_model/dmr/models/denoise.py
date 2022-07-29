@@ -10,8 +10,8 @@ from argparse import ArgumentParser
 
 from .net import *
 from .loss import *
-from utils.dataset import *
-from utils.transform import *
+from deephub.denoisy_model.dmr.utils.dataset import *
+from deephub.denoisy_model.dmr.utils.transform import *
 
 def str_to_class(classname):
     return getattr(sys.modules[__name__], classname)

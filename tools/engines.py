@@ -1,5 +1,3 @@
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 from argparse import ArgumentParser
 
 import torch

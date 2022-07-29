@@ -23,7 +23,7 @@ import numpy as np
 import torch
 from torch import nn
 from torch.autograd import Function
-import emd
+from deephub.denoisy_model.dmr.ops.emd import *
 
 
 

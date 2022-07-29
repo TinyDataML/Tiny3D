@@ -5,7 +5,7 @@ import torch.nn.functional as F
 import math
 
 from .utils import get_knn_idx_dist, group, gather
-from ops.emd.emd_module import emdFunction
+from deephub.denoisy_model.dmr.ops.emd.emd_module import emdFunction
 
 
 def cd_loss(preds, gts):
