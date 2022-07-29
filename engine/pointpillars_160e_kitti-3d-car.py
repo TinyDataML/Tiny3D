@@ -1,6 +1,6 @@
 # pretrain_model
 # pretrain_model=None
-pretrain_model='checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth'
+pretrain_model='checkpoint/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth'
 
 # Trainer params
 accelerator='gpu'
@@ -48,6 +48,10 @@ data = dict(
                 global_rot_range=[0.0, 0.0],
                 rot_range=[-0.15707963267, 0.15707963267]),
             dict(type='RandomFlip3D', flip_ratio_bev_horizontal=0.5),
+            dict(
+                type='DataAugmentor',
+                method='random_local_translation_along_y',
+                params=[-0.2, 0.2]),
             dict(
                 type='GlobalRotScaleTrans',
                 rot_range=[-0.78539816, 0.78539816],

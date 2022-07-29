@@ -1,6 +1,4 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 import torch
 from argparse import ArgumentParser
