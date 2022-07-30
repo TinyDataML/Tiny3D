@@ -64,7 +64,7 @@ def model_predict(args):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Classification demo')
-    parser.add_argument('--type', help='model transfer or model predict')
+    parser.add_argument('--type', help='model transfer or model predict, support: transfer, predict')
     parser.add_argument('--pcd', help='Point cloud file')
     parser.add_argument('--checkpoint', help='Checkpoint file')
     parser.add_argument('--backend', default='onnxruntime', help='support: onnxruntime, torchscript, tensorrt')
