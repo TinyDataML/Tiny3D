@@ -140,3 +140,6 @@ class TestCompressor(unittest.TestCase):
         outputs['dir_scores'] = torch.tensor(ort_output[2])
 
         print('onnx : inference successful!')
+
+if __name__ == '__main__':
+    unittest.main()
