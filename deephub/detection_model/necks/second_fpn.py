@@ -4,7 +4,7 @@ import torch
 from mmcv.cnn import build_conv_layer, build_norm_layer, build_upsample_layer
 from mmcv.runner import BaseModule, auto_fp16
 from torch import nn as nn
-
+from torch.quantization import QuantStub, DeQuantStub
 
 
 class SECONDFPN(BaseModule):
@@ -37,6 +37,8 @@ class SECONDFPN(BaseModule):
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.fp16_enabled = False
+        self.quant = QuantStub()
+        self.dequant = DeQuantStub()
 
         deblocks = []
         for i, out_channel in enumerate(out_channels):
@@ -80,7 +82,22 @@ class SECONDFPN(BaseModule):
             list[torch.Tensor]: Multi-level feature maps.
         """
         assert len(x) == len(self.in_channels)
-        ups = [deblock(x[i]) for i, deblock in enumerate(self.deblocks)]
+        # x = map(self.quant, x)
+        # x = list(x)
+        
+        ups = []
+        for i, deblock in enumerate(self.deblocks):
+            temp = x[i]
+            for j, item in enumerate(deblock):
+                if j == 0:
+                    temp = item(temp)
+                elif j == 1:
+                    temp = item(self.quant(temp))
+            
+            ups.append(temp)
+
+
+        # ups = [deblock(x[i]) for i, deblock in enumerate(self.deblocks)]
 
         if len(ups) > 1:
             out = torch.cat(ups, dim=1)

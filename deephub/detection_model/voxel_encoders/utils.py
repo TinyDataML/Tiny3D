@@ -4,7 +4,7 @@ from mmcv.cnn import build_norm_layer
 from mmcv.runner import auto_fp16
 from torch import nn
 from torch.nn import functional as F
-
+from torch.quantization import QuantStub, DeQuantStub
 
 
 def get_paddings_indicator(actual_num, max_num, axis=0):
@@ -67,6 +67,8 @@ class PFNLayer(nn.Module):
 
         assert mode in ['max', 'avg']
         self.mode = mode
+        self.quant = QuantStub()
+        self.dequant = DeQuantStub()
 
     @auto_fp16(apply_to=('inputs'), out_fp32=True)
     def forward(self, inputs, num_voxels=None, aligned_distance=None):
@@ -84,11 +86,13 @@ class PFNLayer(nn.Module):
         Returns:
             torch.Tensor: Features of Pillars.
         """
-        x = self.linear(inputs)
+        x = self.quant(inputs)
+        x = self.linear(x)
+        x = self.dequant(x)
         x = self.norm(x.permute(0, 2, 1).contiguous()).permute(0, 2,
                                                                1).contiguous()
         x = F.relu(x)
-
+        # x = self.dequant(x)
         if self.mode == 'max':
             if aligned_distance is not None:
                 x = x.mul(aligned_distance.unsqueeze(-1))

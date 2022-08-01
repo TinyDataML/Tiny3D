@@ -5,6 +5,8 @@ from .middle_encoders import PointPillarsScatter
 from .backbones import SECOND
 from .necks import SECONDFPN
 from .heads import Anchor3DHead
+import numpy as np
+from torch.quantization import QuantStub, DeQuantStub
 
 class Pointpillars(BaseModule):
     """Backbone network for SECOND/PointPillars/PartA2/MVXNet.
@@ -43,6 +45,8 @@ class Pointpillars(BaseModule):
             in_channels=384,
             feat_channels=384
         )
+        self.quant = QuantStub()
+        self.dequant = DeQuantStub()
 
     def forward(self,
                 voxels,
@@ -59,8 +63,14 @@ class Pointpillars(BaseModule):
             Returns:
                 List: Result of model.
             """
+        voxels= self.quant(voxels)
+        # num_points= self.quant(num_points)
+        # coors= self.quant(coors)
         x = self.extract_feat(voxels, num_points, coors)
         bbox_preds, scores, dir_scores = self.bbox_head(x)
+        # bbox_preds = self.dequant(bbox_preds)
+        # scores = self.dequant(scores)
+        # dir_scores = self.dequant(dir_scores)
         return bbox_preds, scores, dir_scores
 
     def extract_feat(self,
@@ -79,9 +89,21 @@ class Pointpillars(BaseModule):
         """
         voxel_features = self.voxel_encoder(voxels, num_points, coors)
         batch_size = coors[-1, 0] + 1  # refactor
+        print(coors[-1, 0])
+        # print(batch_size, '------------------')
+        # print("SIZESIZESIZE : ", np.array(voxels.cpu()).shape)
+        # print("SIZESIZESIZE : ", np.array(num_points.cpu()).shape)
+        # print("SIZESIZESIZE : ", np.array(coors.cpu()).shape)
         assert batch_size == 1
+        voxel_features = self.dequant(voxel_features)
         x = self.middle_encoder(voxel_features, coors, batch_size)
+        x = self.quant(x)
         x = self.backbone(x)
+
+        x = map(self.dequant, x)
+        x = list(x)
+
+        # print(size(x))
         x = self.neck(x)
         return x
 

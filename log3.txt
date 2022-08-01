@@ -1,0 +1,390 @@
+load checkpoint from local path: checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth
+voxel_encoder.pfn_layers.0.linear  sparsity :  0.5
+backbone.blocks.0.0  sparsity :  0.5
+backbone.blocks.0.3  sparsity :  0.5
+backbone.blocks.0.6  sparsity :  0.5
+backbone.blocks.0.9  sparsity :  0.5
+backbone.blocks.1.0  sparsity :  0.5
+backbone.blocks.1.3  sparsity :  0.5
+backbone.blocks.1.6  sparsity :  0.5
+backbone.blocks.1.9  sparsity :  0.5
+backbone.blocks.1.12  sparsity :  0.5
+backbone.blocks.1.15  sparsity :  0.5
+backbone.blocks.2.0  sparsity :  0.5
+backbone.blocks.2.3  sparsity :  0.5
+backbone.blocks.2.6  sparsity :  0.5
+backbone.blocks.2.9  sparsity :  0.5
+backbone.blocks.2.12  sparsity :  0.5
+backbone.blocks.2.15  sparsity :  0.5
+bbox_head.conv_cls  sparsity :  0.5
+bbox_head.conv_reg  sparsity :  0.5
+bbox_head.conv_dir_cls  sparsity :  0.5
+SIZESIZESIZE :  (3945, 32, 4)
+SIZESIZESIZE :  (3945,)
+SIZESIZESIZE :  (3945, 4)
+Pointpillars(
+  (voxel_encoder): PillarFeatureNet(
+    (pfn_layers): ModuleList(
+      (0): PFNLayer(
+        (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (linear): Linear(in_features=10, out_features=64, bias=False)
+      )
+    )
+  )
+  (middle_encoder): PointPillarsScatter()
+  (backbone): SECOND(
+    (blocks): ModuleList(
+      (0): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+        (6): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (7): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (8): ReLU(inplace=True)
+        (9): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (10): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (11): ReLU(inplace=True)
+      )
+      (1): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+        (6): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (7): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (8): ReLU(inplace=True)
+        (9): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (10): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (11): ReLU(inplace=True)
+        (12): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (13): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (14): ReLU(inplace=True)
+        (15): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (16): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (17): ReLU(inplace=True)
+      )
+      (2): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (4): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+        (6): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (7): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (8): ReLU(inplace=True)
+        (9): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (10): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (11): ReLU(inplace=True)
+        (12): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (13): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (14): ReLU(inplace=True)
+        (15): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (16): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (17): ReLU(inplace=True)
+      )
+    )
+  )
+  init_cfg={'type': 'Kaiming', 'layer': 'Conv2d'}
+  (neck): SECONDFPN(
+    (deblocks): ModuleList(
+      (0): Sequential(
+        (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (1): Sequential(
+        (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (2): Sequential(
+        (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+        (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+    )
+  )
+  init_cfg=[{'type': 'Kaiming', 'layer': 'ConvTranspose2d'}, {'type': 'Constant', 'layer': 'NaiveSyncBatchNorm2d', 'val': 1.0}]
+  (bbox_head): Anchor3DHead(
+    (conv_cls): Conv2d(384, 2, kernel_size=(1, 1), stride=(1, 1))
+    (conv_reg): Conv2d(384, 14, kernel_size=(1, 1), stride=(1, 1))
+    (conv_dir_cls): Conv2d(384, 4, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+(------------------------------------------------)
+Pointpillars(
+  (voxel_encoder): PillarFeatureNet(
+    (pfn_layers): ModuleList(
+      (0): PFNLayer(
+        (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (linear): Linear(
+          in_features=10, out_features=64, bias=False
+          (activation_post_process): HistogramObserver()
+        )
+      )
+    )
+  )
+  (middle_encoder): PointPillarsScatter()
+  (backbone): SECOND(
+    (blocks): ModuleList(
+      (0): Sequential(
+        (0): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (1): BatchNorm2d(
+          64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (2): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (3): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (4): BatchNorm2d(
+          64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (5): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (6): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (7): BatchNorm2d(
+          64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (8): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (9): Conv2d(
+          64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (10): BatchNorm2d(
+          64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (11): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+      )
+      (1): Sequential(
+        (0): Conv2d(
+          64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (1): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (2): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (3): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (4): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (5): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (6): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (7): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (8): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (9): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (10): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (11): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (12): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (13): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (14): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (15): Conv2d(
+          128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (16): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (17): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+      )
+      (2): Sequential(
+        (0): Conv2d(
+          128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (1): BatchNorm2d(
+          256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (2): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (3): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (4): BatchNorm2d(
+          256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (5): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (6): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (7): BatchNorm2d(
+          256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (8): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (9): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (10): BatchNorm2d(
+          256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (11): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (12): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (13): BatchNorm2d(
+          256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (14): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+        (15): Conv2d(
+          256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+          (activation_post_process): HistogramObserver()
+        )
+        (16): BatchNorm2d(
+          256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (17): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+      )
+    )
+  )
+  init_cfg={'type': 'Kaiming', 'layer': 'Conv2d'}
+  (neck): SECONDFPN(
+    (deblocks): ModuleList(
+      (0): Sequential(
+        (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (2): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+      )
+      (1): Sequential(
+        (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (2): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+      )
+      (2): Sequential(
+        (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(4, 4), bias=False)
+        (1): BatchNorm2d(
+          128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True
+          (activation_post_process): HistogramObserver()
+        )
+        (2): ReLU(
+          inplace=True
+          (activation_post_process): HistogramObserver()
+        )
+      )
+    )
+  )
+  init_cfg=[{'type': 'Kaiming', 'layer': 'ConvTranspose2d'}, {'type': 'Constant', 'layer': 'NaiveSyncBatchNorm2d', 'val': 1.0}]
+  (bbox_head): Anchor3DHead(
+    (conv_cls): Conv2d(
+      384, 2, kernel_size=(1, 1), stride=(1, 1)
+      (activation_post_process): HistogramObserver()
+    )
+    (conv_reg): Conv2d(
+      384, 14, kernel_size=(1, 1), stride=(1, 1)
+      (activation_post_process): HistogramObserver()
+    )
+    (conv_dir_cls): Conv2d(
+      384, 4, kernel_size=(1, 1), stride=(1, 1)
+      (activation_post_process): HistogramObserver()
+    )
+  )
+)
+(------------------------------------------------)
