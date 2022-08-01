@@ -89,11 +89,6 @@ class Pointpillars(BaseModule):
         """
         voxel_features = self.voxel_encoder(voxels, num_points, coors)
         batch_size = coors[-1, 0] + 1  # refactor
-        print(coors[-1, 0])
-        # print(batch_size, '------------------')
-        # print("SIZESIZESIZE : ", np.array(voxels.cpu()).shape)
-        # print("SIZESIZESIZE : ", np.array(num_points.cpu()).shape)
-        # print("SIZESIZESIZE : ", np.array(coors.cpu()).shape)
         assert batch_size == 1
         voxel_features = self.dequant(voxel_features)
         x = self.middle_encoder(voxel_features, coors, batch_size)

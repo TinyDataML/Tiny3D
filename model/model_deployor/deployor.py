@@ -1,5 +1,7 @@
 import torch
-from model.model_deployor.onnx2tensorrt import create_trt_engine, save_trt_engine
+import importlib
+if importlib.util.find_spec('tensorrt') is not None:
+    from model.model_deployor.onnx2tensorrt import create_trt_engine, save_trt_engine
 
 trt_input_shapes = {
     'kitti': {

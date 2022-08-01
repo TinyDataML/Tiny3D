@@ -1,10 +1,10 @@
 # Tiny3D
-[Tiny3D website](https://cmu-multicomp-lab.github.io/multibench/)
+[Tiny3D website](https://github.com/TinyDataML/Tiny3D)
 
-[![codecov](https://codecov.io/gh/pliang279/MultiBench/branch/main/graph/badge.svg?token=IN899HIWCF)](https://codecov.io/gh/pliang279/MultiBench)
-[![Documentation Status](https://readthedocs.org/projects/multibench/badge/?version=latest)](https://multibench.readthedocs.io/en/latest/?badge=latest)
+[![codecov](https://github.com/TinyDataML/Tiny3D)]
+[![Documentation Status](https://github.com/TinyDataML/Tiny3D)]
 
-[Documentation](https://multibench.readthedocs.io/en/latest/), [Tutorials and examples](https://github.com/pliang279/MultiBench/tree/main/examples)
+[Documentation](https://github.com/TinyDataML/Tiny3D), [Tutorials and examples](https://github.com/TinyDataML/Tiny3D)
 
 ## Introduction 
 Tiny3D is a light weight 3d object detection service production system.
@@ -43,3 +43,6 @@ Tiny3D solution embodies two transformative features:
 
 ## Demo
 
+## Acknowlegement
+- [NTU-MLModlCI](https://github.com/cap-ntu/ML-Model-CI)
+- [MLSys and MLOps Community](https://github.com/MLSysOps)

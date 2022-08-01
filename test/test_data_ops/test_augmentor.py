@@ -1,26 +1,140 @@
 import torch
-import unitest
+import unittest
 
-from tiny3d.data.data_denoisor import lidar_augmentation
-
+from data.data_augmentor.data_augmentor import lidar_augmentation
 
 class TestDataAugmentator(unittest.TestCase):
+    
+    def test_data_augmentor_random_flip(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
 
-    @classmethod
-    def setUpData(cls):
-        cls.points = torch.randn(2000, 4)
-        cls.gt_boxes = torch.randn(2000, 7)
-        cls.lidar_data = {"points": cls.points, "gt_boxes": cls.gt_boxes}
+        data_augmented = lidar_augmentation(lidar_data, 'random_flip_along_x')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
 
-    # noinspection DuplicatedCode
-    def test_data_augmentor(self):
-        data_augmented = lidar_augmentation(cls.lidar_data, 'random_flip_along_x')
-        assert data_augmented['points'].shape == torch.size([2000, 4])
-        assert data_augmented['gt_boxes'].shape == torch.size([2000, 7])
+        data_augmented = lidar_augmentation(lidar_data, 'random_flip_along_y')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+    def test_data_augmentor_global_ops(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
 
-        data_augmented = lidar_augmentation(cls.lidar_data, 'random_flip_along_y')
-        assert data_augmented['points'].shape == torch.size([2000, 4])
-        assert data_augmented['gt_boxes'].shape == torch.size([2000, 7])
+        data_augmented = lidar_augmentation(lidar_data, 'global_rotation')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'global_scaling')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+       
+        
+    def test_data_augmentor_random_translation(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
 
+        data_augmented = lidar_augmentation(lidar_data, 'random_translation_along_x')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+
+        data_augmented = lidar_augmentation(lidar_data, 'random_translation_along_y')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'random_translation_along_z')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)    
+        
+    
+    def test_data_augmentor_random_local_translation(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
+
+        data_augmented = lidar_augmentation(lidar_data, 'random_local_translation_along_x')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+
+        data_augmented = lidar_augmentation(lidar_data, 'random_local_translation_along_y')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'random_local_translation_along_z')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)    
+        
+   
+    def test_data_augmentor_global_frustum_dropout(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
+
+        data_augmented = lidar_augmentation(lidar_data, 'global_frustum_dropout_top')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+
+        data_augmented = lidar_augmentation(lidar_data, 'global_frustum_dropout_bottom')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'global_frustum_dropout_left')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'global_frustum_dropout_right')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)        
+        
+        
+    def test_data_augmentor_local_ops(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
+
+        data_augmented = lidar_augmentation(lidar_data, 'local_scaling')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'local_rotation')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        
+    def test_data_augmentor_local_frustum_dropout(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
+
+        data_augmented = lidar_augmentation(lidar_data, 'local_frustum_dropout_top')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+
+        data_augmented = lidar_augmentation(lidar_data, 'local_frustum_dropout_bottom')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'local_frustum_dropout_left')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)
+        
+        data_augmented = lidar_augmentation(lidar_data, 'local_frustum_dropout_right')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)                  
+  
+        
+    def test_data_augmentor_pyramid(self):
+        points = torch.randn(2000, 4)
+        gt_boxes = torch.randn(2000, 7)
+        lidar_data = {"points": points, "gt_boxes": gt_boxes}
+
+        data_augmented = lidar_augmentation(lidar_data, 'pyramid')
+        assert not data_augmented['points'].equal(points)
+        assert not data_augmented['gt_boxes'].equal(gt_boxes)   
+        
+        
 if __name__ == '__main__':
     unittest.main()

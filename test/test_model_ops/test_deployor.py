@@ -8,7 +8,7 @@ from model.model_deployor.deployor import deploy
 from model.model_deployor.deployor_utils import create_input_pointpillars
 from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
 
-pcd = 'test/test_model_ops/data/kitti/kitti_000008.bin'
+pcd = 'test/data_tobe_tested/kitti/kitti_000008.bin'
 device = 'cuda:0'
 input_names = ['voxels', 'num_points', 'coors']
 output_names = ['scores', 'bbox_preds', 'dir_scores']
