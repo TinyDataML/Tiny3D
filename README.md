@@ -39,7 +39,7 @@ Tiny3D solution embodies two transformative features:
 - bad case visulization
 
 ## Example
-### step-1: Edit the data
+### step-1: Edit the data using different data operation method to get high quality dataset
 ```
 from tiny3d.data import dataset_edit
 
