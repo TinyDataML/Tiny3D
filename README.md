@@ -38,8 +38,56 @@ Tiny3D solution embodies two transformative features:
 - testing
 - bad case visulization
 
-## Demo
-wait to be updated
+## Example
+### step-1: Edit the data
+```
+from tiny3d.data import dataset_edit
+
+dataset_edit(dataset_input_path, dataset_output_path, denoise_method=None, 
+             simulation_method='Snow', filter_method=None, 
+             augmentation_method=None, qualification_method=None)
+```
+
+### step-2: Train a model on edited dataset
+```
+from tiny3d.deephub import Pointpillars
+from tiny3d.engine import Pointpillars_engine, fit, build_dataset
+
+torch_model = Pointpillars()
+model = Pointpillars_engine(torch_model)
+
+dataset_train = build_dataset(train_dataset_path)
+dataset_val = build_datasetvcal_dataset_path)
+
+fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
+```
+
+### step-3: Compress a trained model
+```
+from tiny3d.model.model_compressor import torch_prune, dynamic_quant 
+prune_list = [torch.nn.Conv2d, torch.nn.Linear]
+amount_list = [0.3, 0.9]
+torch_prune(model, prune_list, amount_list)
+
+dynamic_quant(model)
+```
+### step-4: Deploy a model
+```
+from tiny3d.model.model_deployor import deploy 
+
+backend='tensorrt'
+backend_file = deploy(model, backend='tensorrt', output_file=output_model_path)
+```
+### step-5: Provide a model serve
+```
+from tiny3d.model.model_server import payload
+
+PyTorch_REST_API_URL = 'http://127.0.0.1:1234/'
+url = PyTorch_REST_API_URL + 'transfer'
+
+# Submit the request
+requests.post(url, files=payload).json()
+```
 
 ## TODO
 ### 1. Add more data ops
