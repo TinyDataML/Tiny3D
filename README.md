@@ -7,7 +7,7 @@
 Tiny3D is a light weight 3d object detection service production system.
 
 ## Features
-Tiny3D solution embodies two transformative features: 
+Tiny3D solution embodies three transformative features: 
 1. **A Performance Optimization Engine** for 3d object detection online/offline inference services product performance optimization. Through this engine users can easily get a high accuracy and high speed 3d object detection service/competetion result in a **Data-Centeric AI** way. Our Performance Optimization Engine can easily be a Plug-in to any machine learning system.
 2. **One line of code** to complete dataset editing, model training, model testing, model compression, model deployment.
 3. **A user-friendly web interface** for a developer team to product a 3d object detection service pictorially, in a low-code fashion. [currently not supported]
