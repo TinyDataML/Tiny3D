@@ -25,10 +25,9 @@ dataset_edit(dataset_input_path, dataset_output_path, denoise_method=None,
 ### step-2: Train a model on edited dataset
 ```
 from tiny3d.deephub import Pointpillars
-from tiny3d.engine import Pointpillars_engine, fit, build_dataset
-
-torch_model = Pointpillars()
-model = Pointpillars_engine(torch_model)
+from tiny3d.engine import build_dataset, engine, fit
+model = Pointpillars()
+model = engine(torch_model)
 
 dataset_train = build_dataset(train_dataset_path)
 dataset_val = build_datasetvcal_dataset_path)
@@ -38,18 +37,15 @@ fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
 
 ### step-3: Compress a trained model
 ```
-from tiny3d.model.model_compressor import torch_prune, dynamic_quant 
-prune_list = [torch.nn.Conv2d, torch.nn.Linear]
-amount_list = [0.3, 0.9]
-torch_prune(model, prune_list, amount_list)
+from tiny3d.model.model_compressor import prune, quant 
 
-dynamic_quant(model)
+prune(model)
+quant(model)
 ```
 ### step-4: Deploy a model
 ```
 from tiny3d.model.model_deployor import deploy 
 
-backend='tensorrt'
 backend_file = deploy(model, backend='tensorrt', output_file=output_model_path)
 ```
 ### step-5: Provide a model serving
@@ -83,14 +79,15 @@ requests.post(url, files=payload).json()
 - bad case visulization
 
 ## TODO
-### 1. Add more data ops
+### 1. Reorganize the code
+### 2. Add more data ops
 - lidar data selection
 - lidar data robustion
 - lidar data privacy
 - lidar data domain adptation
 - lidar data auto-labeling
 - data drift emergency
-### 2. Add visual interaction interface.
+### 3. Add visual interaction interface.
 
 ## Acknowlegement
 - [MLSys and MLOps Community](https://github.com/MLSysOps)
