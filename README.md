@@ -27,7 +27,7 @@ dataset_edit(dataset_input_path, dataset_output_path, denoise_method=None,
 from tiny3d.deephub import Pointpillars
 from tiny3d.engine import build_dataset, engine, fit
 model = Pointpillars()
-model = engine(torch_model)
+model = engine(model)
 
 dataset_train = build_dataset(train_dataset_path)
 dataset_val = build_datasetvcal_dataset_path)
