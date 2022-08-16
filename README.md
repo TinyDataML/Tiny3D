@@ -91,3 +91,4 @@ requests.post(url, files=payload).json()
 
 ## Acknowlegement
 - [MLSys and MLOps Community](https://github.com/MLSysOps)
+- [MLModelCI](https://github.com/cap-ntu/ML-Model-CI)
