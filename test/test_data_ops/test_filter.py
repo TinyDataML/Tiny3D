@@ -50,7 +50,7 @@ def draw_pointcloud(points, colors = None, title = None):
     #plt.show()
     plt.pause(2)
 
-class TestDownSample:
+class TestDownSample(unittest.TestCase):
 
     def setUp(self) -> None:
 
@@ -128,7 +128,7 @@ class TestDownSample:
         assert filtered_lidar_data["points"].shape[0] < lidar_data["points"].shape[0]
         assert filtered_lidar_data["points"].shape[1] >= 3
 
-class TestOutlierRemoval():
+class TestOutlierRemoval(unittest.TestCase):
 
     def setUp(self) -> None:
 
@@ -203,23 +203,23 @@ class TestSmooth(unittest.TestCase):
         plt.ioff()
         return super().tearDown()
 
-    # def test_bilateral_filter(self):
-    #     '''
-    #         Test bilateral filtering method.
-    #     '''
-    #     lidar_data = {"points": self.points}
-    #     filtered_lidar_data = lidar_filter( lidar_data, 
-    #                                         method = "bilateral_filter", 
-    #                                         params = {"radius" : 0.5,
-    #                                                   "sigma_d" : 1.0,
-    #                                                   "sigma_n" : 1.0,
-    #                                                   "knn" : 20,
-    #                                                 }
-    #                                     )
-    #     draw_pointcloud(filtered_lidar_data["points"], title = "bilateral filter")
-    #     print("CD (bilateral filter):",  chamfer_distance(filtered_lidar_data["points"], self.original_points))
-    #     assert filtered_lidar_data["points"].shape[0] <= lidar_data["points"].shape[0]
-    #     assert filtered_lidar_data["points"].shape[1] >= 3
+    def test_bilateral_filter(self):
+        '''
+            Test bilateral filtering method.
+        '''
+        lidar_data = {"points": self.points}
+        filtered_lidar_data = lidar_filter( lidar_data, 
+                                            method = "bilateral_filter", 
+                                            params = {"radius" : 0.5,
+                                                      "sigma_d" : 1.0,
+                                                      "sigma_n" : 1.0,
+                                                      "knn" : 20,
+                                                    }
+                                        )
+        draw_pointcloud(filtered_lidar_data["points"], title = "bilateral filter")
+        print("CD (bilateral filter):",  chamfer_distance(filtered_lidar_data["points"], self.original_points))
+        assert filtered_lidar_data["points"].shape[0] <= lidar_data["points"].shape[0]
+        assert filtered_lidar_data["points"].shape[1] >= 3
 
     def test_weighted_local_optimal_projection(self):
         '''
