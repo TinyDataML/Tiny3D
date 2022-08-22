@@ -54,6 +54,6 @@ def weighted_local_optimal_projection(
                + (beta[:, :, None] * pairwise_displacement_xx).sum(axis = 1)
         X = newX
 
-    filtered_lidar_data = lidar_data
-    filtered_lidar_data["points"] = X
+    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data["points"] = X.astype(points.dtype)
     return filtered_lidar_data
