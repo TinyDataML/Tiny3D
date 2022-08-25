@@ -133,3 +133,4 @@ fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
 ## Acknowlegement
 - [MLSys and MLOps Community](https://github.com/MLSysOps)
 - [MLModelCI](https://github.com/cap-ntu/ML-Model-CI)
+- [mmdetection3d](https://github.com/open-mmlab/mmdetection3d)
