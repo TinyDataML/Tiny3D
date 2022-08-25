@@ -97,7 +97,7 @@ dataset_val = build_datasetvcal_dataset_path)
 
 fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
 ```
-## Operationa Tinye3D currently supported
+## Operations Tiny3D currently supported
 #### Lidar data operations currently supported
 - lidar data loading
 - lidar data sampling
