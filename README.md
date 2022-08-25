@@ -13,6 +13,25 @@ Tiny3D solution embodies four transformative features:
 3. **One line of code** to Fine-grained data editing on different size datasets or single data.
 4. **A user-friendly web interface** for a developer team to product a 3d object detection service pictorially, in a low-code fashion. [currently not supported]
 
+## Lidar data operations currently supported
+- lidar data loading
+- lidar data sampling
+- lidar data preprocessing/cleaning
+- lidar data denoising
+- lidar data outlier detection
+- lidar data augmentation
+- lidar data simulation
+
+## Lidar based 3d object detection model operations currently supported
+- model compression
+- model deploy and serve
+- model ensemble
+
+## Data-Model co-operations currently supported
+- training
+- testing
+- bad case visulization
+
 ## Example1: Fast access to a high-precision 3d object detection service
 #### step-1: Edit the data using different data operation method to get high quality dataset
 ```
@@ -62,7 +81,7 @@ requests.post(url, files=payload).json()
 
 
 ## Example2: Through data editing to further improve the accuracy of 3d object detection service.
-#### step-1: Real world Bad case visulization or potential bad case visulization
+#### step-1: Real world bad case visulization or potential bad case visulization
 ```
 # obtain the potential bad case, you can also specify a real world bad case data path.
 from tiny3d.engine import inference
@@ -97,24 +116,6 @@ dataset_val = build_datasetvcal_dataset_path)
 
 fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
 ```
-## Lidar data operations currently supported
-- lidar data loading
-- lidar data sampling
-- lidar data preprocessing/cleaning
-- lidar data denoising
-- lidar data outlier detection
-- lidar data augmentation
-- lidar data simulation
-
-## Lidar based 3d object detection model operations currently supported
-- model compression
-- model deploy and serve
-- model ensemble
-
-## Data-Model co-operations currently supported
-- training
-- testing
-- bad case visulization
 
 ## TODO
 ### 1. Reorganize the code and docs
