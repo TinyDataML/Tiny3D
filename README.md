@@ -4,7 +4,7 @@
 [Documentation](https://github.com/TinyDataML/Tiny3D), [Tutorials and examples](https://github.com/TinyDataML/Tiny3D)
 
 ## Introduction 
-Tiny3D is a light weight next generation of 3d object detection service production system.
+Tiny3D is a next generation of 3D object detection service production system.
 
 ## Features
 Tiny3D solution embodies four transformative features: 
