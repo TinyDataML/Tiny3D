@@ -13,7 +13,7 @@ Tiny3D solution embodies four transformative features:
 3. **One line of code** to Fine-grained data editing on different size datasets or single data.
 4. **A user-friendly web interface** for a developer team to product a 3d object detection service pictorially, in a low-code fashion. [currently not supported]
 
-## Example1: Fast access to a high-precision 3d object detection service
+## Example1:  Fast access to a high-precision 3d object detection service
 #### step-1: Edit the data using different data operation method to get high quality dataset
 ```
 from tiny3d.data import dataset_edit
@@ -62,7 +62,7 @@ requests.post(url, files=payload).json()
 ```
 
 
-## Example2: Through data editing to further improve the accuracy of 3d object detection service.
+## Example2:  Through data editing to further improve the accuracy of 3d object detection service.
 #### step-1: Real world bad case visulization or potential bad case visulization
 ```
 # obtain the potential bad case, you can also specify a real world bad case data path.
@@ -86,8 +86,8 @@ dataset_edit(bad_case_data_path, dataset_output_path, denoise_method=None,
              simulation_method='Snow, Rain', filter_method=None, 
              augmentation_method=None, qualification_method=None)
 ```
-#### step-3: Re-train the model on a edited data.
-```
+#### step-3: Re-train the model on a edited data and deploy it.
+
 ## Operations Tiny3D currently supported
 #### Lidar data operations currently supported
 - lidar data loading
