@@ -13,25 +13,6 @@ Tiny3D solution embodies four transformative features:
 3. **One line of code** to Fine-grained data editing on different size datasets or single data.
 4. **A user-friendly web interface** for a developer team to product a 3d object detection service pictorially, in a low-code fashion. [currently not supported]
 
-## Lidar data operations currently supported
-- lidar data loading
-- lidar data sampling
-- lidar data preprocessing/cleaning
-- lidar data denoising
-- lidar data outlier detection
-- lidar data augmentation
-- lidar data simulation
-
-## Lidar based 3d object detection model operations currently supported
-- model compression
-- model deploy and serve
-- model ensemble
-
-## Data-Model co-operations currently supported
-- training
-- testing
-- bad case visulization
-
 ## Example1: Fast access to a high-precision 3d object detection service
 #### step-1: Edit the data using different data operation method to get high quality dataset
 ```
@@ -116,17 +97,38 @@ dataset_val = build_datasetvcal_dataset_path)
 
 fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
 ```
+## Operationa Tinye3D currently supported
+#### Lidar data operations currently supported
+- lidar data loading
+- lidar data sampling
+- lidar data preprocessing/cleaning
+- lidar data denoising
+- lidar data outlier detection
+- lidar data augmentation
+- lidar data simulation
+
+#### Lidar based 3d object detection model operations currently supported
+- model compression
+- model deploy and serve
+- model ensemble
+
+#### Data-Model co-operations currently supported
+- training
+- testing
+- bad case visulization
+
 
 ## TODO
-### 1. Reorganize the code and docs
-### 2. Add more data ops
+#### 1. Reorganize the code and docs
+#### 2. Add more data ops
 - lidar data selection
 - lidar data robustion
 - lidar data privacy
 - lidar data domain adptation
 - lidar data auto-labeling
 - data drift emergency
-### 3. Add visual interaction interface.
+#### 3. Add visual interaction interface.
+
 
 ## Acknowlegement
 - [MLSys and MLOps Community](https://github.com/MLSysOps)
