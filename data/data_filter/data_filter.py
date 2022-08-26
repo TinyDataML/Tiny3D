@@ -1,6 +1,5 @@
 import numpy as np
 import open3d as o3d
-from .wlop import weighted_local_optimal_projector
 
 def remove_statistical_outlier(lidar_data, nb_neighbors, std_ratio):
 
@@ -173,8 +172,6 @@ def lidar_filter(lidar_data, method, params):
         return random_sample(lidar_data, **params)
     elif (method == "bilateral_filter"):
         return bilateral_filter(lidar_data, **params)
-    elif (method == "weighted_local_optimal_projector"):
-        return weighted_local_optimal_projector(lidar_data, **params)
     else:
         raise Exception("Error: `%s` Not implented." % method)
 
