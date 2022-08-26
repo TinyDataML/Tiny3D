@@ -14,7 +14,7 @@ def remove_statistical_outlier(lidar_data, nb_neighbors, std_ratio):
     if (points.shape[1] > 3):
         filterer_points = np.concatenate( (filterer_points, points[ind, 3:]), axis = -1)
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = filterer_points
 
     return filtered_lidar_data
@@ -31,7 +31,7 @@ def remove_radius_outlier(lidar_data, nb_points, radius):
     if (points.shape[1] > 3):
         filterer_points = np.concatenate( (filterer_points, points[ind, 3:]), axis = -1)
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = filterer_points
 
     return filtered_lidar_data
@@ -54,7 +54,7 @@ def voxel_down_sample(lidar_data, voxel_size):
         axis = 0
     )
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = filtered_points
     return filtered_lidar_data
 
@@ -80,7 +80,7 @@ def uniform_down_sample(lidar_data, voxel_size):
 
     filtered_points = points[survived, ...]
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = filtered_points
     return filtered_lidar_data
 
@@ -102,7 +102,7 @@ def farthest_point_sample(lidar_data, n_points):
         distance = np.minimum(dist_centroid, distance)
         farthest = np.argmax(distance, -1)
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = points[idx, ...]
     return filtered_lidar_data
 
@@ -113,7 +113,7 @@ def random_sample(lidar_data, n_points):
     N = points.shape[0]
     selected = np.random.permutation(N)[:n_points]
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = points[selected, ...]
     return filtered_lidar_data
 
@@ -152,7 +152,7 @@ def bilateral_filter(lidar_data, radius, sigma_d, sigma_n, knn = 30):
             np.exp(- dis_n ** 2 / (2 * sigma_n**2) )
         filtered_points[i, :3] += (weight * dis_n).sum() / weight.sum() * normal
 
-    filtered_lidar_data = lidar_data.copy()
+    filtered_lidar_data = lidar_data
     filtered_lidar_data["points"] = filtered_points
     return filtered_lidar_data
 
