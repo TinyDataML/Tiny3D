@@ -20,26 +20,24 @@ import torch.nn.utils.prune as prune
 
 import unittest
 
-input_names = ['voxels', 'num_points', 'coors']
-output_names = ['scores', 'bbox_preds', 'dir_scores']
-dynamic_axes = {'voxels': {0: 'voxels_num'},
-                    'num_points': {0: 'voxels_num'},
-                    'coors': {0: 'voxels_num'}}
-    # dynamic_axes = None
-
-pcd = '../../test/test_model_ops/data/kitti/kitti_000008.bin'
-checkpoint = '../../checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth'
-dataset = 'kitti'
-model_name = 'pointpillars'
-# device = 'cpu'
-backend = 'onnxruntime'
-output = 'pointpillars'
-fp16 = False
-
 class TestCompressor(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        input_names = ['voxels', 'num_points', 'coors']
+        output_names = ['scores', 'bbox_preds', 'dir_scores']
+        dynamic_axes = {'voxels': {0: 'voxels_num'},
+                    'num_points': {0: 'voxels_num'},
+                    'coors': {0: 'voxels_num'}}
+
+        pcd = '../../test/test_model_ops/data/kitti/kitti_000008.bin'
+        checkpoint = '../../checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth'
+        dataset = 'kitti'
+        model_name = 'pointpillars'
+        # device = 'cpu'
+        backend = 'onnxruntime'
+        output = 'pointpillars'
+        fp16 = False
         model = Pointpillars()
         load_checkpoint(model, '../../checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth', map_location='cpu')
         model.eval()
@@ -61,23 +59,6 @@ class TestCompressor(unittest.TestCase):
 
         torch_out = model_int8(model_inputs[0], model_inputs[1], model_inputs[2])
 
-        import onnxruntime
-
-        ort_session = onnxruntime.InferenceSession(backend_file)
-
-        input_dict = {}
-        input_dict['voxels'] = model_inputs[0].cpu().numpy()
-        input_dict['num_points'] = model_inputs[1].cpu().numpy()
-        input_dict['coors'] = model_inputs[2].cpu().numpy()
-        ort_output = ort_session.run(['scores', 'bbox_preds', 'dir_scores'], input_dict)
-
-        outputs = {}
-        outputs['scores'] = torch.tensor(ort_output[0])
-        outputs['bbox_preds'] = torch.tensor(ort_output[1])
-        outputs['dir_scores'] = torch.tensor(ort_output[2])
-
-        print('onnx : inference successful!')
-    
     def test_dynamic_quant(self):
         device = 'cuda:0'
         model.cuda()
@@ -91,24 +72,8 @@ class TestCompressor(unittest.TestCase):
 
         torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])
 
-        import onnxruntime
-
-        ort_session = onnxruntime.InferenceSession(backend_file)
-
-        input_dict = {}
-        input_dict['voxels'] = model_inputs[0].cpu().numpy()
-        input_dict['num_points'] = model_inputs[1].cpu().numpy()
-        input_dict['coors'] = model_inputs[2].cpu().numpy()
-        ort_output = ort_session.run(['scores', 'bbox_preds', 'dir_scores'], input_dict)
-
-        outputs = {}
-        outputs['scores'] = torch.tensor(ort_output[0])
-        outputs['bbox_preds'] = torch.tensor(ort_output[1])
-        outputs['dir_scores'] = torch.tensor(ort_output[2])
-
-        print('onnx : inference successful!')
     
-    def test_torch_prune(self):
+    def test_prune_1(self):
         device = 'cuda:0'
         model.cuda()
 
@@ -120,26 +85,10 @@ class TestCompressor(unittest.TestCase):
         prune_list = [torch.nn.Conv2d, torch.nn.Linear]
         amount_list = [0.3, 0.9]
 
-        torch_prune(model, prune_list, amount_list)
+        prune_1(model, prune_list, amount_list)
 
         torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])
 
-        import onnxruntime
-
-        ort_session = onnxruntime.InferenceSession(backend_file)
-
-        input_dict = {}
-        input_dict['voxels'] = model_inputs[0].cpu().numpy()
-        input_dict['num_points'] = model_inputs[1].cpu().numpy()
-        input_dict['coors'] = model_inputs[2].cpu().numpy()
-        ort_output = ort_session.run(['scores', 'bbox_preds', 'dir_scores'], input_dict)
-
-        outputs = {}
-        outputs['scores'] = torch.tensor(ort_output[0])
-        outputs['bbox_preds'] = torch.tensor(ort_output[1])
-        outputs['dir_scores'] = torch.tensor(ort_output[2])
-
-        print('onnx : inference successful!')
 
 if __name__ == '__main__':
     unittest.main()
