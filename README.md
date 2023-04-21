@@ -32,7 +32,7 @@ model = Pointpillars()
 model = engine(model)
 
 dataset_train = build_dataset(train_dataset_path)
-dataset_val = build_datasetvcal_dataset_path)
+dataset_val = build_dataset(val_dataset_path)
 
 fit(dataset_train=dataset_train, dataset_val=dataset_val, torch_model=model)
 ```
