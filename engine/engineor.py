@@ -1,7 +1,7 @@
 import torch
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
-from engine.pointpillars_engine import Pointpillars_engine
+from engine.engine_utils import Engine
 import pytorch_lightning.callbacks as plc
 from functools import partial
 from mmcv.parallel import collate
@@ -25,7 +25,7 @@ def fit(dataset_train, dataset_val, torch_model, epoch=80, devices=1, accelerato
             https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pytorch_lightning/
     """
 
-    model = Pointpillars_engine(torch_model)
+    model = Engine(torch_model)
 
     data_loader_train = DataLoader(
         dataset_train,
@@ -70,7 +70,7 @@ def eval(dataset_val, torch_model, weights=None, accelerator='gpu', devices=1):
             https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pytorch_lightning/
     """
 
-    model = Pointpillars_engine(torch_model)
+    model = Engine(torch_model)
     # load weights
     if weights != None:
         checkpoint = torch.load(weights)
@@ -101,7 +101,7 @@ def predict(dataset_val, torch_model, weights=None, accelerator='gpu', devices=1
             https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pytorch_lightning/
     """
 
-    model = Pointpillars_engine(torch_model)
+    model = Engine(torch_model)
     # load weights
     if weights != None:
         checkpoint = torch.load(weights)
@@ -133,7 +133,7 @@ def inference(pcd_data, torch_model, weights=None, accelerator='gpu', devices=1)
             https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pytorch_lightning/
     """
 
-    model = Pointpillars_engine(torch_model)
+    model = Engine(torch_model)
     # load weights
     if weights != None:
         checkpoint = torch.load(weights)

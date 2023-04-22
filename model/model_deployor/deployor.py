@@ -1,44 +1,9 @@
 import torch
+from model.model_deployor.deployor_utils import trt_input_shapes
 import importlib
 if importlib.util.find_spec('tensorrt') is not None:
-    from model.model_deployor.onnx2tensorrt import create_trt_engine, save_trt_engine
+    from model.model_deployor.deployor_utils import create_trt_engine, save_trt_engine
 
-trt_input_shapes = {
-    'kitti': {
-        'voxels': {
-            'min_shape': [2000, 32, 4],
-            'opt_shape': [5000, 32, 4],
-            'max_shape': [9000, 32, 4]
-        },
-        'num_points': {
-            'min_shape': [2000],
-            'opt_shape': [5000],
-            'max_shape': [9000]
-        },
-        'coors': {
-            'min_shape': [2000, 4],
-            'opt_shape': [5000, 4],
-            'max_shape': [9000, 4]
-        }
-    },
-    'nuscenes': {
-        'voxels': {
-            'min_shape': [5000, 20, 4],
-            'opt_shape': [20000, 20, 4],
-            'max_shape': [30000, 20, 4]
-        },
-        'num_points': {
-            'min_shape': [5000],
-            'opt_shape': [20000],
-            'max_shape': [30000]
-        },
-        'coors': {
-            'min_shape': [5000, 4],
-            'opt_shape': [20000, 4],
-            'max_shape': [30000, 4]
-        }
-    }
-}
 
 def deploy(model,
            model_inputs,
