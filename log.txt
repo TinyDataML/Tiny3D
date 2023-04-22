@@ -1,0 +1,9 @@
+load checkpoint from local path: checkpoints/hv_pointpillars_secfpn_6x8_160e_kitti-3d-car_20220331_134606-d42d15ed.pth
+tensor(0, dtype=torch.int32)
+SIZESIZESIZE :  (3945, 32, 4)
+SIZESIZESIZE :  (3945,)
+SIZESIZESIZE :  (3945, 4)
+tensor(0, dtype=torch.int32)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+tensor(0, dtype=torch.int32)
+3.690884590148926
