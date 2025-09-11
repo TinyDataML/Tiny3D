@@ -1,7 +1,7 @@
 # Tiny3D
-[Tiny3D website](https://github.com/TinyDataML/Tiny3D)
+[Tiny3D website](https://github.com/TinyDataML)
 
-[Documentation](https://github.com/TinyDataML/Tiny3D), [Tutorials and examples](https://github.com/TinyDataML/Tiny3D)
+[Documentation](https://github.com/TinyDataML), [Tutorials and examples](https://github.com/TinyDataML)
 
 ## Introduction 
 Tiny3D is a next generation of 3D object detection service production system.
