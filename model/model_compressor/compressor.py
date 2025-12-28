@@ -1,7 +1,7 @@
 import torch.nn.utils.prune as prune
 import torch
 
-def torch_prune(model, prune_list, amount_list):
+def prune_1(model, prune_list, amount_list):
 
     for n, module in model.named_modules():
         for j, prune_item in enumerate(prune_list):

@@ -49,12 +49,12 @@ def main():
                           backend=backend, output_file=output, fp16=fp16, dataset=dataset)
 
 
-    # torch_prune
+    # prune_1
     #----------------------------------------
     prune_list = [torch.nn.Conv2d, torch.nn.Linear]
     amount_list = [0.3, 0.9]
 
-    torch_prune(model, prune_list, amount_list)
+    prune_1(model, prune_list, amount_list)
     #----------------------------------------
 
     torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])

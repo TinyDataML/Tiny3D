@@ -4,7 +4,7 @@ from mmcv.runner import force_fp32
 from torch import nn
 
 from .utils import PFNLayer, get_paddings_indicator
-
+from torch.quantization import QuantStub, DeQuantStub
 
 class PillarFeatureNet(nn.Module):
     """Pillar Feature Net.
@@ -85,6 +85,8 @@ class PillarFeatureNet(nn.Module):
         self.y_offset = self.vy / 2 + point_cloud_range[1]
         self.z_offset = self.vz / 2 + point_cloud_range[2]
         self.point_cloud_range = point_cloud_range
+        self.quant = QuantStub()
+        self.dequant = DeQuantStub()
 
     @force_fp32(out_fp16=True)
     def forward(self, features, num_points, coors):
@@ -100,12 +102,14 @@ class PillarFeatureNet(nn.Module):
             Returns:
                 torch.Tensor: Features of pillars.
             """
+        features = self.dequant(features)
         features_ls = [features]
         # Find distance of x, y, and z from cluster center
         if self._with_cluster_center:
             points_mean = features[:, :, :3].sum(
                 dim=1, keepdim=True) / num_points.type_as(features).view(-1, 1, 1)
             f_cluster = features[:, :, :3] - points_mean
+            # f_cluster = self.quant(f_cluster)
             features_ls.append(f_cluster)
 
         # Find distance of x, y, and z from pillar center
@@ -131,7 +135,16 @@ class PillarFeatureNet(nn.Module):
             features_ls.append(points_dist)
 
         # Combine together feature decorations
+        # features_ls = self.dequant(features_ls)
+        # for i1 in features_ls:
+        #     for i2 in i1:
+        #         for i3 in i2:
+        #             i3 = self.dequant(i3)
+
         features = torch.cat(features_ls, dim=-1)
+        # features = self.quant(features)
+        # features = [self.quant(i) for i in features]
+
         # The feature decorations were calculated without regard to whether
         # pillar was empty. Need to ensure that
         # empty pillars remain set to zeros.
@@ -142,5 +155,6 @@ class PillarFeatureNet(nn.Module):
         for pfn in self.pfn_layers:
             features = pfn(features, num_points)
 
+        features = self.quant(features)
         return features.squeeze(1)
 
