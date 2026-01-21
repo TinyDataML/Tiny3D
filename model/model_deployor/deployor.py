@@ -67,22 +67,31 @@ def deploy(model,
         Reference:
             https://github.com/open-mmlab/mmdeploy/blob/master/tools/deploy.py
     """
-    assert backend in ['onnxruntime', 'tensorrt'], 'This backend isn\'t supported now!'
+    assert backend in ['onnxruntime', 'tensorrt', 'torchscript'], 'This backend isn\'t supported now!'
 
-    output_file = output_file + '.onnx'
-    torch.onnx.export(
-        model,
-        model_inputs,
-        output_file,
-        export_params=True,
-        input_names=input_names,
-        output_names=output_names,
-        opset_version=11,
-        dynamic_axes=dynamic_axes,
-        keep_initializers_as_inputs=False,
-        verbose=verbose)
     if backend == 'onnxruntime':
+        output_file = output_file + '.onnx'
+        torch.onnx.export(
+            model,
+            model_inputs,
+            output_file,
+            export_params=True,
+            input_names=input_names,
+            output_names=output_names,
+            opset_version=11,
+            dynamic_axes=dynamic_axes,
+            keep_initializers_as_inputs=False,
+            verbose=verbose)
         return output_file
+
+    if backend == 'torchscript':
+        with torch.no_grad():
+            output_file_name=output_file+".jit"
+            jit_model = torch.jit.trace(model, model_inputs)
+            jit_model.save(output_file_name)
+            print("torchscript successfully converts, saved as: ", output_file_name)
+            return output_file_name
+
     if backend == 'tensorrt':
         engine = create_trt_engine(
             output_file,
