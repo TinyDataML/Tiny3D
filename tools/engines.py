@@ -7,7 +7,7 @@ from mmcv import Config
 from mmdet3d.datasets import build_dataset
 
 from model.model_deployor.deployor_utils import create_input
-from engine.pointpillars_engine import Pointpillars_engine
+from engine.engine_utils import Engine
 from deephub.detection_model import Pointpillars
 from engine import fit, eval, predict, inference
 
@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     # get model params
     if temp_args.model_name == "pointpillars":
-        parser = Pointpillars_engine.add_model_specific_args(parser)
+        parser = Engine.add_model_specific_args(parser)
 
     # # Add pytorch lightning's args to parser as a group.
     # parser = Trainer.add_argparse_args(parser)

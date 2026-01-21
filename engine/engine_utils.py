@@ -17,7 +17,7 @@ from mmdet.core import images_to_levels, multi_apply
 from mmdet.models.losses import FocalLoss, CrossEntropyLoss, SmoothL1Loss
 
 
-class Pointpillars_engine(pl.LightningModule):
+class Engine(pl.LightningModule):
     def __init__(self, torch_model):
         super().__init__()
         self.torch_model = torch_model

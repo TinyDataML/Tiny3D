@@ -7,7 +7,7 @@ Tiny3D uses a warp engine for the pytorch model to train and evaluate, and the t
 We built Pytorch Lighting Module for pointpillars, You can refer to [PyTorch Lightning](https://www.pytorchlightning.ai/) to build your model.
 
 ```python
-class Pointpillars_engine(pl.LightningModule):
+class Engine(pl.LightningModule):
 	def __init__(self):
 		# define pytorch networks.
         
@@ -39,7 +39,7 @@ After defining the Pytorch model, we wrap it into a Pytorch Lighting model as:
 
 ```python
 torch_model = Pointpillars()
-model = Pointpillars_engine(torch_model)
+model = Engine(torch_model)
 ```
 
 
@@ -79,7 +79,7 @@ pointpillars
 --mode
 fit
 --config
-engine/pointpillars_160e_kitti-3d-car.py
+engine/config.py
 ```
 
 

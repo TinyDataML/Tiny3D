@@ -5,8 +5,8 @@ import numpy as np
 import onnxruntime
 from deephub.detection_model import Pointpillars
 from model.model_deployor.deployor import deploy
-from model.model_deployor.deployor_utils import create_input_pointpillars
-from model.model_deployor.onnx2tensorrt import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
+from model.model_deployor.deployor_utils import create_input
+from model.model_deployor.deployor_utils import load_trt_engine, torch_dtype_from_trt, torch_device_from_trt
 
 pcd = 'test/data_tobe_tested/kitti/kitti_000008.bin'
 device = 'cuda:0'
@@ -17,34 +17,32 @@ dynamic_axes = {'voxels': {0: 'voxels_num'},
                     'coors': {0: 'voxels_num'}}
 # dynamic_axes = None
 fp16 = False
-
+data, model_inputs = create_input(pcd, 'kitti', 'pointpillars', device)
+model = Pointpillars()
+model.cuda()
+model.eval()
 
 class TestModelDeployor(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        data, model_inputs = create_input_pointpillars(pcd, 'kitti', device)
-        cls.model_inputs = model_inputs
-        model = Pointpillars()
-        model.cuda()
-        model.eval()
-        cls.model = model
+        pass
 
     # noinspection DuplicatedCode
     def test_deployor_onnx(self):
         # Compute Pytorch model outputs
-        torch_out = self.model(self.model_inputs[0], self.model_inputs[1], self.model_inputs[2])
+        torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])
         # deploy ONNX
-        backend_file = deploy(self.model, self.model_inputs, input_names, output_names, dynamic_axes, backend='onnxruntime',
+        backend_file = deploy(model, model_inputs, input_names, output_names, dynamic_axes, backend='onnxruntime',
                               output_file='end2end', fp16=fp16)
 
         # Compute ONNX model outputs
         ort_session = onnxruntime.InferenceSession(backend_file)
 
         input_dict = {}
-        input_dict['voxels'] = self.model_inputs[0].cpu().numpy()
-        input_dict['num_points'] = self.model_inputs[1].cpu().numpy()
-        input_dict['coors'] = self.model_inputs[2].cpu().numpy()
+        input_dict['voxels'] = model_inputs[0].cpu().numpy()
+        input_dict['num_points'] = model_inputs[1].cpu().numpy()
+        input_dict['coors'] = model_inputs[2].cpu().numpy()
         ort_output = ort_session.run(['scores', 'bbox_preds', 'dir_scores'], input_dict)
 
         outputs = {}
@@ -65,9 +63,9 @@ class TestModelDeployor(unittest.TestCase):
 
     def test_deployor_trt(self):
         # Compute Pytorch model outputs
-        torch_out = self.model(self.model_inputs[0], self.model_inputs[1], self.model_inputs[2])
+        torch_out = model(model_inputs[0], model_inputs[1], model_inputs[2])
         # deploy TensorRT
-        backend_file = deploy(self.model, self.model_inputs, input_names, output_names, dynamic_axes,
+        backend_file = deploy(model, model_inputs, input_names, output_names, dynamic_axes,
                               backend='tensorrt',
                               output_file='end2end', fp16=fp16)
 
@@ -78,9 +76,9 @@ class TestModelDeployor(unittest.TestCase):
         input_names_trt = list(filter(engine.binding_is_input, names))
         output_names_trt = list(set(names) - set(input_names_trt))
         input_dict = {
-            'voxels': self.model_inputs[0],
-            'num_points': self.model_inputs[1],
-            'coors': self.model_inputs[2]
+            'voxels': model_inputs[0],
+            'num_points': model_inputs[1],
+            'coors': model_inputs[2]
         }
         bindings = [None] * (len(input_names_trt) + len(output_names_trt))
 
